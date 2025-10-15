@@ -1,0 +1,10 @@
+= Тестовое задание Rick & Morty
+Tepex <tepex@mail.ru>
+1.0, 15/X-2025
+:source-highliter: rouge
+
+Реализация https://rickandmortyapi.com/documentation[API Rick and Morty] на Котлин.
+
+== Сборка и запуск
+TODO: qqq
+
