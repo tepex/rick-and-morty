@@ -1,23 +1,46 @@
 package ru.work_mate.rick_and_morty.presentation.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(id: Int) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Detail Screen")
-    }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "Detail") },
+                navigationIcon = {
+                    //if (navController.previousBackStackEntry != null) {
+                        IconButton(onClick = { /*navController.navigateUp()*/ }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back"
+                            )
+                        }
+                    //}
+                }
+            )
+        },
+        content = { paddingValues ->
+            // Your screen content goes here
+            // Example:
+            Text(
+                text = "Detail Screen $id",
+                modifier = Modifier.padding(paddingValues)
+            )
+        }
+    )
 }
 
 @Preview
