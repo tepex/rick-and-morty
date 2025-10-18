@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "ru.work_mate.rick_and_morty"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -36,13 +36,14 @@ android {
 
     kotlin {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
+            jvmTarget.set(JvmTarget.JVM_11)
             javaParameters.set(true)
         }
     }
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -56,6 +57,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+    implementation(libs.timber)
     
     testImplementation(libs.junit)
     
