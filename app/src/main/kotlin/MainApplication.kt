@@ -1,8 +1,10 @@
 package ru.work_mate.rick_and_morty
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class MainApplication : Application() {
 
     override fun onCreate() {
