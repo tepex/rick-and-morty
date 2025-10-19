@@ -1,6 +1,7 @@
 package ru.work_mate.rick_and_morty.presentation.ui
 
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +29,8 @@ fun ScreenDispatcher() {
         ),
         entryProvider = entryProvider {
              entry<RootRoute> {
+
+                 /*
                  LazyColumn {
                      items(10) { i ->
                          Button(onClick = {
@@ -36,6 +39,10 @@ fun ScreenDispatcher() {
                              Text("item $i")
                          }
                      }
+                 }*/
+                 val searchState = rememberTextFieldState()
+                 MainScreen(searchState, emptyList()) { search ->
+                     Timber.d("search: $search")
                  }
              }
 
