@@ -1,6 +1,8 @@
 package ru.work_mate.rick_and_morty.presentation.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +13,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
@@ -30,6 +33,10 @@ import ru.work_mate.rick_and_morty.presentation.model.CharacterListItem
 import timber.log.Timber
 import java.nio.file.WatchEvent
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.zIndex
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,19 +55,49 @@ fun MainScreen(
             )
         },
         content = { paddingValues ->
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                Row { Filter() }
-                Row {
-                    SearchContent(state.value.result) { onDetail(it) }
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp)
+                    ) { 
+                        Filter() 
+                    }
+                    Row {
+                        SearchContent(state.value.result) { onDetail(it) }
+                    }
+                    Row {
+                        PagingBar()
+                    }
                 }
-                Row {
-                    PagingBar()
+                if (state.value.isLoading) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.Black.copy(alpha = 0.5f))
+                            .zIndex(1f)
+                            .pointerInput(Unit) {},
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            CircularProgressIndicator(color = Color.White)
+                            Text(text = "Loading...", color = Color.White)
+                        }
+                    }
                 }
-           }
+            }
         }
     )
 }

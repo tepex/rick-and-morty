@@ -20,7 +20,11 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State> = _state.asStateFlow()
 
-    fun search(query: String) {
+    init {
+        search()
+    }
+
+    fun search(query: String = "") {
         viewModelScope.launch {
             _state.emit(State(search = TextFieldState(query), isLoading = true))
             Timber.d("Start searching \"$query\"...")
