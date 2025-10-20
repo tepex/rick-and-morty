@@ -7,10 +7,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+//import androidx.hilt.l
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import ru.work_mate.rick_and_morty.presentation.DetailViewModel
 import timber.log.Timber
 
 data object RootRoute
@@ -40,15 +43,19 @@ fun ScreenDispatcher() {
                          }
                      }
                  }*/
-                 val searchState = rememberTextFieldState()
-                 MainScreen(searchState, emptyList()) { search ->
-                     Timber.d("search: $search")
+                 //val searchState = rememberTextFieldState()
+                 MainScreen(hiltViewModel()) { id ->
+                     backStack.add(DetailRoute(id))
+                     Timber.d("go to: $id")
                  }
              }
 
-            entry<DetailRoute> { id ->
-                Text("Detail id: $id")
-                Timber.d("select: $id")
+            entry<DetailRoute> { route ->
+                hiltViewModel<DetailViewModel, DetailViewModel.Factory> { it.create(route) }.also {
+                    DetailScreen(it) {
+                        backStack.removeLastOrNull()
+                    }
+                }
             }
         }
     )

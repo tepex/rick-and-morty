@@ -12,23 +12,25 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import ru.work_mate.rick_and_morty.presentation.DetailViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(id: Int) {
+fun DetailScreen(
+    viewModel: DetailViewModel,
+    goBack: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(text = "Detail") },
                 navigationIcon = {
-                    //if (navController.previousBackStackEntry != null) {
-                        IconButton(onClick = { /*navController.navigateUp()*/ }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Back"
-                            )
-                        }
-                    //}
+                    IconButton(onClick = goBack) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
                 }
             )
         },
@@ -36,15 +38,16 @@ fun DetailScreen(id: Int) {
             // Your screen content goes here
             // Example:
             Text(
-                text = "Detail Screen $id",
+                text = viewModel.content,
                 modifier = Modifier.padding(paddingValues)
             )
         }
     )
 }
 
+/*
 @Preview
 @Composable
 fun DetailScreenPreview() {
     DetailScreen(1)
-}
+}*/

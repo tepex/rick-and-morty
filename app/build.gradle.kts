@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.navigation3.ui)
 
     implementation(libs.hilt)
+    implementation(libs.hilt.compose)
     ksp(libs.hilt.ksp)
     implementation(libs.timber)
     
