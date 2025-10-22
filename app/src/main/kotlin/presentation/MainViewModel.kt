@@ -8,6 +8,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.work_mate.rick_and_morty.presentation.model.CharacterListItem
 import timber.log.Timber
@@ -33,11 +34,11 @@ class MainViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    private suspend fun setResult() {
+    private fun setResult() {
         MutableList(20) { i -> CharacterListItem(i, "item ${(i+1)}") }.toList()
-            .also {
-                Timber.d("result: $it")
-                _state.emit(state.value.copy(result = it, isLoading = false))
+            .also { result ->
+                Timber.d("result: $result")
+                _state.update { it.copy(result = result, isLoading = false) }
             }
     }
 

@@ -44,12 +44,12 @@ fun MainScreen(
     viewModel: MainViewModel,
     onDetail: (Int) -> Unit
 ) {
-    val state = viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    TitleSearchBar(state.value.search, viewModel::search)
+                    TitleSearchBar(state.search, viewModel::search)
                 },
                 actions = { }
             )
@@ -73,13 +73,13 @@ fun MainScreen(
                         Filter() 
                     }
                     Row {
-                        SearchContent(state.value.result) { onDetail(it) }
+                        SearchContent(state.result) { onDetail(it) }
                     }
                     Row {
                         PagingBar()
                     }
                 }
-                if (state.value.isLoading) {
+                if (state.isLoading) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()

@@ -20,6 +20,7 @@ lifecycle-viewmodel = "1.0.0-alpha04"
 kotlinx-coroutines = "1.10.2"
 ktlint = "0.50.0"
 timber = "5.0.1"
+k3dm = "2.1.0"
 
 # test
 junit = "4.13.2"
@@ -59,6 +60,7 @@ hilt-ksp = { module = "com.google.dagger:hilt-android-compiler", version.ref = "
 
 javax-inject = { module = "javax.inject:javax.inject", version = "1" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+k3dm = { module = "ru.it-arch:k3dm", version.ref = "k3dm" }
 
 # test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
