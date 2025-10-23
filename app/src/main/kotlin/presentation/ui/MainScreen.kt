@@ -22,16 +22,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.work_mate.rick_and_morty.presentation.MainViewModel
-import ru.work_mate.rick_and_morty.presentation.model.CharacterListItem
-import timber.log.Timber
-import java.nio.file.WatchEvent
+import ru.work_mate.rick_and_morty.presentation.model.CharacterItemUi
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
@@ -149,7 +143,7 @@ private fun Filter() {
 
 @Composable
 private fun SearchContent(
-    characters: List<CharacterListItem>,
+    characters: List<CharacterItemUi>,
     onClick: (Int) -> Unit
 ) {
     Box {

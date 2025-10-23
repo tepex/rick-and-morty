@@ -14,7 +14,6 @@ public interface CharacterItem : RmItem {
     public val origin: LocationLink
     public val location: LocationLink
     public val image: Character.ImageUrl
-    public val episodes: List<EpisodeLink>
 
     override fun validate() {}
 

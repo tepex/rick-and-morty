@@ -16,4 +16,8 @@ public interface Repository {
 public interface PageResult {
 
     public val items: List<RmItem>
+
+    public companion object {
+        public const val ITEMS_PER_PAGE: Int = 20
+    }
 }
