@@ -1,7 +1,7 @@
 package ru.work_mate.rick_and_morty.domain.model
 
+import kotlinx.datetime.LocalDate
 import ru.it_arch.k3dm.ValueObject
-import java.time.LocalDate
 
 /**
  * Модель сущности Episode.

@@ -1,6 +1,7 @@
 package ru.work_mate.rick_and_morty.domain.model.impl
 
 import ru.it_arch.k3dm.ValueObject
+import ru.work_mate.rick_and_morty.domain.model.Episode
 import ru.work_mate.rick_and_morty.domain.model.FilterQuery
 import ru.work_mate.rick_and_morty.domain.model.Location
 
@@ -70,6 +71,48 @@ public data class FilterQueryImpl private constructor(
                     LocationImpl.NameImpl(name!!),
                     LocationImpl.TypeImpl(type!!)
                 )
+            }
+        }
+    }
+
+    @ConsistentCopyVisibility
+    public data class EpisodeFilterImpl private constructor(
+        override val name: Episode.Name,
+        override val episode: Episode.Code
+    ) : FilterQuery.Filter.EpisodeFilter {
+
+        init {
+            validate()
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ValueObject.Data> fork(vararg args: Any?): T =
+            Builder().apply {
+                name = args[0] as Episode.Name
+                episode = args[1] as Episode.Code
+            }.build() as T
+
+        public class Builder {
+            public var name: Episode.Name? = null
+            public var episode: Episode.Code? = null
+
+            public fun build(): FilterQuery.Filter.EpisodeFilter {
+                requireNotNull(name) { "EpisodeFilter.name must not be null!" }
+                requireNotNull(episode) { "EpisodeFilter.episode must not be null!" }
+
+                return EpisodeFilterImpl(name!!, episode!!)
+            }
+        }
+
+        public class DslBuilder {
+            public var name: String? = null
+            public var episode: String? = null
+
+            public fun build(): FilterQuery.Filter.EpisodeFilter {
+                requireNotNull(name) { "EpisodeFilter.name must not be null!" }
+                requireNotNull(episode) { "EpisodeFilter.episode must not be null!" }
+
+                return EpisodeFilterImpl(EpisodeImpl.NameImpl(name!!), EpisodeImpl.CodeImpl(episode!!))
             }
         }
     }
